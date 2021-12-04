@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const dataPath = path.join(__dirname , 'data-sample.txt')
+const dataPath = path.join(__dirname , 'input.txt')
 const depths = fs.readFileSync(dataPath, 'utf-8')
 	.trim()
 	.split('\n')
