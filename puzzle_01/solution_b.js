@@ -7,11 +7,18 @@ const depths = fs.readFileSync(dataPath, 'utf-8')
 	.map((line) => parseInt(line, 10))
 
 let increaseCount = 0
-let last = depths.shift()
-depths.forEach((current) => {
+let a = depths.shift()
+let b = depths.shift()
+let c = depths.shift()
+let last = (a + b + c)
+depths.forEach((d) => {
+	let current = (b + c + d)
 	if (current > last) {
 		increaseCount += 1
 	}
+	a = b
+	b = c
+	c = d
 	last = current
 })
 
