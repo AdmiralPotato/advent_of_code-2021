@@ -156,6 +156,7 @@ const tick = () => {
   iterateGrid(flashGrid, countFlashesThisTick)
   flashesTotal += flashesThisTick
   updateDisplay()
+  return flashesThisTick
 }
 
 let tickInterval = 0;
@@ -173,7 +174,19 @@ const clickHandlerMap = {
         clearInterval(tickInterval)
       }
     }, 1000/24)
-  }
+  },
+  tickUntilFull() {
+    if (tickInterval) {
+      clearInterval(tickInterval)
+    }
+    tickInterval = setInterval(() => {
+      const total = tick()
+      const fullCount = width * height
+      if(total === fullCount) {
+        clearInterval(tickInterval)
+      }
+    }, 1000/24)
+  },
 }
 
 document.body.addEventListener('click', (event) => {
