@@ -72,11 +72,12 @@ const displayState = (grid, context, colorConvert) => {
 const updateDisplay = () => {
   displayState(stateGrid, stateContext, colorRainbow)
   displayState(flashGrid, flashContext, colorFlash)
-  console.table(stateGrid)
+  // console.table(stateGrid)
   const output = JSON.stringify({
     flashesThisTick,
     flashesTotal,
     ticks,
+    iterationsUntilStable: previousPatterns.length
   }, null, '  ')
   statusText.innerText = output
   console.log(output)
@@ -159,6 +160,7 @@ const tick = () => {
   return flashesThisTick
 }
 
+const previousPatterns = []
 let tickInterval = 0;
 const clickHandlerMap = {
   tick,
@@ -186,6 +188,37 @@ const clickHandlerMap = {
         clearInterval(tickInterval)
       }
     }, 1000/24)
+  },
+  tickUntilStable() {
+    if (tickInterval) {
+      clearInterval(tickInterval)
+    }
+    tickInterval = setInterval(() => {
+      tick()
+      const pattern = stateGrid.map((line) => line.join('')).join('\n')
+      if (
+        previousPatterns.length > 0xFFFFFFFF
+      ) {
+        previousPatterns.shift()
+      }
+      if(previousPatterns.includes(pattern)) {
+        clearInterval(tickInterval)
+      }
+      previousPatterns.push(pattern)
+    }, 1000/24)
+  },
+  createCustomGrid () {
+    width = 50
+    height = 50
+    stateGrid = makeZeroGrid()
+    iterateGrid(stateGrid, () => {
+      return Math.floor(Math.random() * 10)
+    })
+    stateContext = prepContextById('state')
+    flashContext = prepContextById('flash')
+    statusText.innerText = 'loaded'
+    flashGrid = makeZeroGrid()
+    updateDisplay()
   },
 }
 
