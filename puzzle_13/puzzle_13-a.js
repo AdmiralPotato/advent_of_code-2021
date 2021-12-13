@@ -121,7 +121,7 @@ const foldAxes = {
     const smaller = a[0].length <= b[0].length ? a : b
     const larger = a[0].length > b[0].length ? a : b
     const widthDifference = larger[0].length - smaller[0].length
-    larger.forEach((row) => row.reverse())
+    b.forEach((row) => row.reverse())
     iterateGrid(larger, (grid, cellValue, x, y) => {
       let value = cellValue
       const smallerColumnIndex = x - widthDifference
@@ -138,7 +138,7 @@ const foldAxes = {
     const smaller = a.length <= b.length ? a : b
     const larger = a.length > b.length ? a : b
     const heightDifference = larger.length - smaller.length
-    larger.reverse()
+    b.reverse()
     iterateGrid(larger, (grid, cellValue, x, y) => {
       let value = cellValue
       const smallerRowIndex = y - heightDifference
