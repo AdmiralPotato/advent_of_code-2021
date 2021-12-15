@@ -112,7 +112,7 @@ const updateDisplay = () => {
   const output = JSON.stringify({
     pathTotalDanger,
     currentPosition,
-    pathHistory,
+    pathHistoryLength: pathHistory.length,
     width: stateGridSize.width,
     height: stateGridSize.height,
   }, null, '  ')
@@ -204,21 +204,39 @@ const tick = () => {
 
 let tickInterval = 0;
 const clickHandlerMap = {
-  tick,
-  tickAll() {
-    const complete = tick()
-    if (complete) {
-      clickHandlerMap.reset()
-    }
-    if (tickInterval) {
-      clearInterval(tickInterval)
-    }
-    tickInterval = setInterval(() => {
-      const complete = tick()
-      if(complete) {
-        clearInterval(tickInterval)
-      }
-    }, 1000/24)
+  tick() {
+    statusText.innerText = 'HOLD YOUR HORSES THIS GONNA TAKE A DAMN SECOND'
+    setTimeout(tick,10)
+  },
+  makeBigGrid() {
+    statusText.innerText = 'HOLD YOUR HORSES THIS GONNA TAKE A DAMN SECOND'
+    setTimeout( //give the UI a tick to update before THINK REAL HARD
+      () => {
+        const {width, height} = stateGridSize
+        const big = makeZeroGrid(
+          5 * width,
+          5 * height,
+        )
+        for (let yPrime = 0; yPrime < 5; yPrime++) {
+          for (let xPrime = 0; xPrime < 5; xPrime++) {
+            const primeOffset = xPrime + yPrime
+            for (let yLocal = 0; yLocal < height; yLocal++) {
+              for (let xLocal = 0; xLocal < width; xLocal++) {
+                const x = (xPrime * width) + xLocal
+                const y = (yPrime * height) + yLocal
+                const cellValue = stateGrid[yLocal][xLocal]
+                const mutated = (primeOffset + cellValue)
+                big[y][x] = mutated > 9 ? mutated % 10 + 1 : mutated
+              }
+            }
+          }
+        }
+        stateGrid = big
+        console.log(big[0].join(''))
+        init(stateGrid)
+      },
+      10
+    )
   },
   reset () {
     if (tickInterval) {
