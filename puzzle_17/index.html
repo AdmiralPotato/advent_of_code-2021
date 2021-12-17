@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>pew pew sensor pod</title>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: #000;
+            color: #999;
+        }
+        pre#grid {
+            border: 1px solid #333;
+            font-size: 10px;
+            line-height: 0.5em;
+        }
+    </style>
+</head>
+<body>
+<div id="canvases">
+    <pre id="grid"></pre>
+    <pre id="state"></pre>
+</div>
+<div>
+    <input type="number" value="10" id="number" />
+    <button data-handler="reset">reset</button>
+    <button data-handler="tick">tick</button>
+    <button data-handler="tickAll">tickAll</button>
+</div>
+<pre id="status"></pre>
+<script src="puzzle_17-a.js"></script>
+</body>
+</html>
