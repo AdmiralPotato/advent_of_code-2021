@@ -114,8 +114,8 @@ const isPointInRectBounds = ({x, y}, rect) => {
     || y >= (rect.y + rect.height)
   )
 }
-const isPointBelowTargetZone = ({x, y}) => {
-  return y < targetZone.yMin
+const isPointPastTargetZone = ({x, y}) => {
+  return y < targetZone.yMin || x > targetZone.xMax
 }
 
 const putValueIntoGrid = (value, position) => {
@@ -197,7 +197,7 @@ const tick = () => {
 const endReached = () => {
   return (
     success
-    || isPointBelowTargetZone(sensorPosition)
+    || isPointPastTargetZone(sensorPosition)
   )
 }
 let tickInterval
