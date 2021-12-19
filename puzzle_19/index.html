@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>pew pew sensor pod</title>
+    <style>
+        body {
+            position: relative;
+            font-family: monospace;
+            background-color: #000;
+            color: #999;
+            margin: 0;
+            padding: 0;
+        }
+        pre#status {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0;
+            border: 1px solid #333;
+            font-size: 24px;
+            background-color: #333a;
+            padding: 0;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<pre id="status">no status text yet</pre>
+<script src="https://unpkg.com/lil-gui@0.15.0/dist/lil-gui.umd.js"></script>
+<script src="https://unpkg.com/three@0.135.0/build/three.js"></script>
+<script src="https://unpkg.com/three@0.135.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://unpkg.com/three@0.135.0/examples/js/utils/BufferGeometryUtils.js"></script>
+<script src="scene.js"></script>
+<script src="puzzle_19-a.js"></script>
+</body>
+</html>
