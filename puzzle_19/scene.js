@@ -79,8 +79,14 @@ function initMesh() {
 
 }
 
-function makeMeshesForVerts( verts ) {
-
+function makeMeshesForVerts( verts, setCount, setIndex ) {
+  const material = new THREE.MeshBasicMaterial({
+    color: new THREE.Color().setHSL(
+      setIndex * (1 / setCount),
+      1,
+      0.5
+    ),
+  })
   const matrix = new THREE.Matrix4();
   const mesh = new THREE.InstancedMesh(
     geometry,
@@ -120,7 +126,7 @@ function init() {
   // scene
 
   scene = new THREE.Scene();
-  scene.background = new THREE.Color( 0xffffff );
+  scene.background = new THREE.Color( 0x000000 );
 
   // controls
 

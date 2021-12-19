@@ -42,9 +42,13 @@ scannerMapPromise.then((scannerMap) => {
   )
 
   let totalVerts = 0
-  scanners.forEach((verts) => {
+  scanners.forEach((verts, scannerIndex, scanners) => {
     totalVerts += verts.length
-    makeMeshesForVerts(verts)
+    makeMeshesForVerts(
+      verts,
+      scanners.length,
+      scannerIndex
+    )
   })
 
   statusElement.innerText = `totalVerts: ${totalVerts}`
